@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.combine.DAO.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.combine.model.Cart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productID" property="productID" jdbcType="INTEGER" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="productPrice" property="productPrice" jdbcType="DOUBLE" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="productTotal" property="productTotal" jdbcType="INTEGER" />
+    <result column="productSelled" property="productSelled" jdbcType="INTEGER" />
+    <result column="customerID" property="customerID" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, productID, productName, productPrice,amount, productTotal, productSelled, customerID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectBycustomerID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where customerID = #{0}
+  </select>
+  <select id="selectByProductID" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where productID = #{0}
+  </select>
+  <select id="isExist" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where productID = #{0} and customerID=#{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCart">
+    delete from cart
+    where customerID=#{0} and productID=#{1}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.combine.model.Cart" >
+    insert into cart (id, productID, productName, 
+      productPrice, amount,productTotal, productSelled, 
+      customerID)
+    values (#{id,jdbcType=INTEGER}, #{productID,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productPrice,jdbcType=DOUBLE},#{amount,jdbcType=INTEGER}, #{productTotal,jdbcType=INTEGER}, #{productSelled,jdbcType=INTEGER}, 
+      #{customerID,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.combine.model.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productID != null" >
+        productID,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="productPrice != null" >
+        productPrice,
+      </if>
+      <if test="amount != null" >
+       amount,
+      </if>
+      <if test="productTotal != null" >
+        productTotal,
+      </if>
+      <if test="productSelled != null" >
+        productSelled,
+      </if>
+      <if test="customerID != null" >
+        customerID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productID != null" >
+        #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        #{productPrice,jdbcType=DOUBLE},
+      </if>
+       <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="productTotal != null" >
+        #{productTotal,jdbcType=INTEGER},
+      </if>
+      <if test="productSelled != null" >
+        #{productSelled,jdbcType=INTEGER},
+      </if>
+      <if test="customerID != null" >
+        #{customerID,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.combine.model.Cart" >
+    update cart
+    <set >
+      <if test="productID != null" >
+        productID = #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPrice != null" >
+        productPrice = #{productPrice,jdbcType=DOUBLE},
+      </if>
+       <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="productTotal != null" >
+        productTotal = #{productTotal,jdbcType=INTEGER},
+      </if>
+      <if test="productSelled != null" >
+        productSelled = #{productSelled,jdbcType=INTEGER},
+      </if>
+      <if test="customerID != null" >
+        customerID = #{customerID,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.combine.model.Cart" >
+    update cart
+    set productID = #{productID,jdbcType=INTEGER},
+      productName = #{productName,jdbcType=VARCHAR},
+      productPrice = #{productPrice,jdbcType=DOUBLE},
+      amount= #{amount,jdbcType=INTEGER},
+      productTotal = #{productTotal,jdbcType=INTEGER},
+      productSelled = #{productSelled,jdbcType=INTEGER},
+      customerID = #{customerID,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

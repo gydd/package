@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- annotation spring容器扫描指定包下的所有类，如果类上有注解  那么根据注解产生相应bean对象已经映射信息 -->
+	<!-- 配置handerAdapter  适配器 -->
+	<mvc:default-servlet-handler/>
+	<context:component-scan base-package="com.ssm.combine"/>
+	<context:annotation-config/>
+	<mvc:annotation-driven />
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	    <!-- 将视图名 渲染后视图的前缀 -->
+	    <property name="prefix" value="/"/>
+	    <!-- 渲染后视图的后缀 -->
+	    <property name="suffix" value=".jsp"/>
+	    <!-- 例：视图名为:hello   渲染后：/JSP/hello.jsp 该页面-->
+	</bean>
+	
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver"  
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置编码格式 -->  
+		<property name="defaultEncoding" value="utf-8"></property> 
+		<!-- 设置文件大小 -->  
+        <property name="maxUploadSize" value="10485760000"></property>
+        <!-- 设置缓冲区大小 -->  
+        <property name="maxInMemorySize" value="40960"></property>  
+	</bean> 
+	
+	<!-- 拦截器的配置
+	<mvc:interceptors>
+	在 mvc:interceptors中可以配置多个拦截器 
+		多个拦截器按顺序一一执行
+	
+		<mvc:interceptor>
+			指明哪些请求需要被拦截
+				/login.do 表示login.do需要被拦截
+				/user/add.do 表示/user/add.do请求要被拦截
+				/* 表示项目路径下的所有请求被拦截 
+					可以拦截： /login.do  /add.do  /user.do /sys.do等
+				/**表示项目路径及其子路径下的所有请求被拦截=所有请求被拦截
+					可以拦截： /login.do  /add.do  /user.do /sys.do
+					/user/add.do
+			
+			<mvc:mapping path="/**"/>
+			指定拦截器的位置
+			<bean class="com.ssm.combine.interceptor.LoginInterceptor">
+			   <property name="allowedPass">session未放用户信息的允许Controllers
+			      <list>
+			         <value>cus_login.do</value>
+			         <value>sel_login.do</value>
+			         <value>adm_login.do</value>
+			         <value>cus_register.do</value>			        		        
+			         <value>sel_register.do</value>			        		        
+			         <value>cus_searchByPrice.do</value>			        		        
+			         <value>cus_searchBySold.do</value>			        		        
+			         <value>cus_searchProduct.do</value>			        		        
+			         <value>cus_getProduct.do</value>			        		        
+			         <value>cus_getProductPicture.do</value>			        		        
+			         <value>cus_goShop.do</value>			        		        
+			         <value>cus_searchProductByClassID.do</value>		        		        
+			      </list>
+			   </property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+ </beans>

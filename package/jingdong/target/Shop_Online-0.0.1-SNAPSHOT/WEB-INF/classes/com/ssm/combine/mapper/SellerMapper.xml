@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名  -->
+<mapper namespace="com.ssm.combine.DAO.SellerDAO">
+	<select id="selectSeller" resultType="Seller">
+		select * from Seller where telePhone = #{0}
+	</select>
+	
+	<select id="selectSellerByName" resultType="Seller">
+		select * from Seller where nickName like #{0} or telePhone like #{0} and isBlack=0
+	</select>
+	
+	<select id="selectSellerName" resultType="Seller">
+		select * from Seller where telePhone = #{0} and password=#{1}
+	</select>
+	
+	<insert id="insertIntoSeller" parameterType="Seller">
+		insert into Seller values(null,#{nickName},#{realName},#{password},#{telePhone},#{id_card},0,#{registerTime},#{updateTime},#{idPicture})
+	</insert>
+	
+	<update id="updateSeller">
+		update Seller set password=#{1} where telePhone=#{0}
+	</update>
+	
+	<update id="updateTime">
+		update Seller set updateTime=#{1} where telePhone=#{0}
+	</update>
+	
+	<select id="selectAllSellers" resultType="Seller">
+		select * from Seller where isBlack=0
+	</select>
+	
+	<delete id="deleteFromSeller">
+		delete from Seller where telePhone=#{0}
+	</delete>
+	
+	<select id="getBlackList" resultType="Seller">
+		select * from Seller where isBlack=1
+	</select>
+</mapper>

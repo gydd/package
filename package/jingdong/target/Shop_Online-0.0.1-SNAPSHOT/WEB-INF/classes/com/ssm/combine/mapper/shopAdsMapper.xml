@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.combine.DAO.shopAdsMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.combine.model.shopAds" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="shopID" property="shopID" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="register_time" property="register_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ssm.combine.model.shopAds" >
+    insert into shop_ads (id, shopID,price, status, 
+      register_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{shopID,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, 
+      #{register_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.combine.model.shopAds" >
+    insert into shop_ads
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopID != null" >
+        shopID,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="register_time != null" >
+        register_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shopID != null" >
+        #{shopID,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="register_time != null" >
+        #{register_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByPrimaryId">
+  		delete from shop_ads where id=#{0}
+  </delete>
+  <delete id="deleteRejectedList">
+  		delete from shop_ads where status=-1
+  </delete>
+  
+  <update id="updateStatus">
+  		update shop_ads set status=#{1},update_time=#{2} where id=#{0}
+  </update>
+  <update id="updateStatusAutomatically">
+  		update shop_ads set status=-1 where status=0
+  </update>
+  
+  <select id="selectSellerAds" resultType="shopAds">
+  		select * from shop_ads where shopID=#{0}
+  </select>
+  <select id="selectById" resultType="shopAds">
+  		select * from shop_ads where id=#{0}
+  </select>
+  <select id="selectByStatus" resultType="shopAds">
+  		select * from shop_ads where status=#{0}
+  </select>
+   <select id="selectNotByStatus" resultType="shopAds">
+  		select * from shop_ads where status!=#{0}
+  </select>
+  <select id="selectByTop" resultType="shopAds">
+  		select * from shop_ads where status=0 ORDER BY price DESC LIMIT #{0}
+  </select>
+</mapper>

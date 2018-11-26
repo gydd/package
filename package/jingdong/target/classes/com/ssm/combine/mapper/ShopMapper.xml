@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名  -->
+<mapper namespace="com.ssm.combine.DAO.ShopDAO">
+
+	<select id="selectShopsBySellerID" resultType="Shop">
+		select * from Shop where sellerID = #{0}
+	</select>
+	
+	<select id="selectShopsByShopID" resultType="Shop">
+		select * from Shop where id = #{0}
+	</select>
+	
+	<select id="selectAllShops" resultType="Shop">
+		select * from Shop
+	</select>
+	
+	<select id="selectShopsByApplyStatus" resultType="Shop">
+		select * from Shop where applyStatus=#{0}
+	</select>
+	
+	<select id="selectShopsNotByApplyStatus" resultType="Shop">
+		select * from Shop where applyStatus!=#{0}
+	</select>
+	
+	<select id="selectShopsByName" resultType="Shop">
+		select * from Shop where name like #{0} or sellerID like #{0}  and applyStatus=0
+	</select>
+	
+	<update id="updateApplyStatus">
+		update Shop set applyStatus=#{1},reason=#{2} where id=#{0}
+	</update>
+	
+	<update id="updateBlackStatus">
+		update Shop set BlackStatus=#{1} where id=#{0}
+	</update>
+	
+	<update id="updateShopDetails" parameterType="Shop">
+		update Shop set	name=#{name},description=#{description},picture=#{picture} where id=#{id}
+	</update>
+	
+	<delete id="deleteShop">
+		delete from Shop where id=#{0}
+	</delete>
+	
+	<insert id="insertIntoShop" parameterType="Shop">
+		insert into Shop values(null,#{name},#{description},#{sellerID},#{registerTime},#{updateTime},#{picture},0,0,null)
+	</insert>
+	
+	<select id="getBlackList" resultType="Shop">
+		select * from Shop where blackStatus=1
+	</select>
+</mapper>

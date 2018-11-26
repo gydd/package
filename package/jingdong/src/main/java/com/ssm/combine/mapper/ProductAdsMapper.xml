@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.combine.DAO.ProductAdsMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.combine.model.ProductAds" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sellerID" property="sellerID" jdbcType="VARCHAR" />
+    <result column="productID" property="productID" jdbcType="INTEGER" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="register_time" property="register_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sellerID, productID, productName, price, status, register_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_ads
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_ads
+    where status = #{0}
+  </select>
+  <select id="selectNotByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_ads
+    where status != #{0}
+  </select>
+  <select id="selectByTop" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_ads
+    where status=0 ORDER BY price DESC LIMIT #{0}
+  </select>
+  <select id="selectBysellerID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_ads
+    where sellerID = #{0}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_ads
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteRejectedList">
+  		delete from product_ads where status=-1
+  </delete>
+  <insert id="insert" parameterType="com.ssm.combine.model.ProductAds" >
+    insert into product_ads (id, sellerID, productID, 
+      productName, price, status, 
+      register_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{sellerID,jdbcType=VARCHAR}, #{productID,jdbcType=INTEGER}, 
+      #{productName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, 
+      #{register_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.combine.model.ProductAds" >
+    insert into product_ads
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sellerID != null" >
+        sellerID,
+      </if>
+      <if test="productID != null" >
+        productID,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="register_time != null" >
+        register_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sellerID != null" >
+        #{sellerID,jdbcType=VARCHAR},
+      </if>
+      <if test="productID != null" >
+        #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="register_time != null" >
+        #{register_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.combine.model.ProductAds" >
+    update product_ads
+    <set >
+      <if test="sellerID != null" >
+        sellerID = #{sellerID,jdbcType=VARCHAR},
+      </if>
+      <if test="productID != null" >
+        productID = #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="register_time != null" >
+        register_time = #{register_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.combine.model.ProductAds" >
+    update product_ads
+    set sellerID = #{sellerID,jdbcType=VARCHAR},
+      productID = #{productID,jdbcType=INTEGER},
+      productName = #{productName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      register_time = #{register_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusAutomatically">
+  		update product_ads set status=-1 where status=0
+  </update>
+</mapper>

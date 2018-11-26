@@ -1,0 +1,5 @@
+com/ssm/combine/controller/SendMessageControllerTest.class
+com/ssm/combine/controller/AdministratorControllerTest.class
+com/ssm/combine/service/AdministratorServiceTest.class
+com/ssm/combine/controller/CustomerControllerTest.class
+com/ssm/combine/controller/SellerControllerTest.class

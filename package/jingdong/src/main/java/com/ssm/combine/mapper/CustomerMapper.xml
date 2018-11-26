@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名  -->
+<mapper namespace="com.ssm.combine.DAO.CustomerDAO">
+	
+	<!-- <resultMap type="Customer" id="customerResult">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="password" property="password"/>
+		<id     column="telephone" property="telephone"/>
+		<result column="address" property="address"/>
+		<result column="e_mail" property="e_mail"/>
+		<result column="isBlack" property="isBlack"/>
+		<result column="registerTime" property="registerTime"/>
+		<result column="updateTime" property="updateTime"/>
+	</resultMap> -->
+	
+	<select id="selectCustomer" resultType="Customer">
+		select * from Customer where telePhone = #{0}
+	</select>
+	
+	<select id="selectCustomerByName" resultType="Customer">
+		select * from Customer where name like #{0} or telephone like #{0}  and isBlack=0
+	</select>
+	
+	<select id="selectCustomerName" resultType="Customer">
+		select * from Customer where telePhone = #{0} and password=#{1}
+	</select>
+	
+	<insert id="insertIntoCustomer" parameterType="Customer">
+		insert into Customer values(null,#{name},#{password},#{telephone},#{address},#{e_mail},0,#{registerTime},#{updateTime})
+	</insert>
+	
+	<update id="updateCustomer">
+		update Customer set password=#{1} where telePhone=#{0}
+	</update>
+	
+	<update id="updateTime">
+		update Customer set updateTime=#{1} where telePhone=#{0}
+	</update>
+	
+	<update id="updateCustomerInfo">
+		update Customer set name=#{1},address=#{2},e_mail=#{3} where telephone=#{0}
+	</update>
+	
+	<update id="changeToBlackStatue">
+		update Customer set isBlack=1 where telePhone=#{0}
+	</update>
+	
+	<update id="cancelFromBlackStatue">
+		update Customer set isBlack=0 where telePhone=#{0}
+	</update>
+	
+	<select id="selectAllCustomers" resultType="Customer">
+		select * from Customer where isBlack=0
+	</select>
+	
+	<delete id="deleteFromCustomer">
+		delete from Customer where telePhone=#{0}
+	</delete>
+	
+	<select id="getBlackList" resultType="Customer">
+		select * from Customer where isBlack=1
+	</select>
+</mapper>

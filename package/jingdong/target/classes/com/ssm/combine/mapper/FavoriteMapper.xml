@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.combine.DAO.FavoriteMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.combine.model.Favorite" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="favID" property="favID" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="customerID" property="customerID" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, favID, type,amount, customerID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from favorite
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectProductFav" resultMap="BaseResultMap">
+    select * from favorite where type=0 and customerID=#{0}
+  </select>
+  <select id="selectShopFav" resultMap="BaseResultMap">
+    select * from favorite where type=1 and customerID=#{0}
+  </select>
+  <select id="isExist" resultMap="BaseResultMap">
+    select * from favorite where favID=#{0} and type=#{1} and customerID=#{2}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from favorite
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByFavID">
+    delete from favorite
+    where favID=#{0} and type=#{1} and customerID=#{2}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.combine.model.Favorite" >
+    insert into favorite (id, favID, type, amount,
+      customerID)
+    values (#{id,jdbcType=INTEGER}, #{favID,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER},
+      #{customerID,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.combine.model.Favorite" >
+    insert into favorite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="favID != null" >
+        favID,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+       <if test="amount != null" >
+       amount,
+      </if>
+      <if test="customerID != null" >
+        customerID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="favID != null" >
+        #{favID,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+       <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="customerID != null" >
+        #{customerID,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.combine.model.Favorite" >
+    update favorite
+    <set >
+      <if test="favID != null" >
+        favID = #{favID,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        type = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="customerID != null" >
+        customerID = #{customerID,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.combine.model.Favorite" >
+    update favorite
+    set favID = #{favID,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+       amount = #{amount,jdbcType=INTEGER},
+      customerID = #{customerID,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

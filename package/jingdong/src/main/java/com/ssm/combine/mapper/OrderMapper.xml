@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.combine.DAO.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.combine.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="productID" property="productID" jdbcType="INTEGER" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="productCount" property="productCount" jdbcType="INTEGER" />
+    <result column="totalPrice" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="adminPrice" property="adminPrice" jdbcType="DECIMAL" />
+    <result column="customerID" property="customerID" jdbcType="VARCHAR" />
+    <result column="sellerID" property="sellerID" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="addressID" property="addressID" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, productID, productName, productCount, totalPrice, adminPrice,customerID, sellerID, status, 
+    addressID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from productorder
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectOrders" resultMap="BaseResultMap">
+  		select * from productorder
+  </select>  
+  <select id="selectUnpaidByCustomerID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from productorder
+    where customerID = #{0} and status=0
+  </select>
+  <select id="selectPaidByCustomerID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from productorder
+    where customerID = #{0} and status!=0
+  </select>
+  <select id="selectBySellerID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from productorder
+    where sellerID = #{0} and status!=0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from productorder
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.combine.model.Order" >
+    insert into productorder (id, productID, productName, 
+      productCount, totalPrice, adminPrice,customerID, 
+      sellerID, status, addressID
+      )
+    values (#{id,jdbcType=INTEGER}, #{productID,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
+      #{productCount,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, #{adminPrice,jdbcType=DECIMAL},#{customerID,jdbcType=VARCHAR}, 
+      #{sellerID,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{addressID,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.combine.model.Order" >
+    insert into productorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productID != null" >
+        productID,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="productCount != null" >
+        productCount,
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice,
+      </if>
+      <if test="adminPrice != null" >
+        adminPrice,
+      </if>
+      <if test="customerID != null" >
+        customerID,
+      </if>
+      <if test="sellerID != null" >
+        sellerID,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="addressID != null" >
+        addressID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productID != null" >
+        #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null" >
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+       <if test="adminPrice != null" >
+        #{adminPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerID != null" >
+        #{customerID,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerID != null" >
+        #{sellerID,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addressID != null" >
+        #{addressID,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.combine.model.Order" >
+    update productorder
+    <set >
+      <if test="productID != null" >
+        productID = #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null" >
+        productCount = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+       <if test="adminPrice != null" >
+        adminPrice = #{adminPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerID != null" >
+        customerID = #{customerID,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerID != null" >
+        sellerID = #{sellerID,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addressID != null" >
+        addressID = #{addressID,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.combine.model.Order" >
+    update productorder
+    set productID = #{productID,jdbcType=INTEGER},
+      productName = #{productName,jdbcType=VARCHAR},
+      productCount = #{productCount,jdbcType=INTEGER},
+      totalPrice = #{totalPrice,jdbcType=DECIMAL},
+     adminPrice = #{adminPrice,jdbcType=DECIMAL},
+      customerID = #{customerID,jdbcType=VARCHAR},
+      sellerID = #{sellerID,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      addressID = #{addressID,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

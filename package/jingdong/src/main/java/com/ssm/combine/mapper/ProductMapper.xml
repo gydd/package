@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名  -->
+<mapper namespace="com.ssm.combine.DAO.ProductDAO">
+
+	<select id="selectProductsBySellerID" resultType="Product">
+		select * from Product where sellerID = #{0}
+	</select>
+	
+	<select id="selectProductsByClassID" resultType="Product">
+		select * from Product where class_id = #{0} and isBlack=0
+	</select>
+	
+	<select id="selectById" resultType="Product">
+		select * from Product where id=#{0}
+	</select>
+	
+	<select id="selectAllProducts" resultType="Product">
+		select * from Product where isBlack=0
+	</select>
+	
+	<select id="selectNotInAds" resultType="Product">
+		SELECT * FROM product WHERE product.`sellerID`=#{0} AND product.`id` NOT IN( SELECT product.id FROM Product,product_ads
+		WHERE product.id=product_ads.productID AND product.sellerID=#{0} AND product_ads.sellerID=#{0}) 
+	</select>
+	
+	<select id="selectProductByName" resultType="Product">
+		select * from Product where name like #{0} and isBlack=0
+	</select>
+	
+	<select id="selectProductOrderByPrice" resultType="Product">
+		select * from Product where name like #{0} and isBlack=0 order by price ASC
+	</select>
+	
+	<select id="selectProductOrderBySold" resultType="Product">
+		select * from Product where name like #{0} and isBlack=0 order by selled DESC
+	</select>
+	
+	<update id="updateSelled">
+		update Product set total=total-#{1},selled=selled+#{1} 
+		where id=#{0}
+	</update>
+	
+	<update id="updateTotal">
+		update Product set total=total+#{1} where id=#{0}
+	</update>
+	
+	<update id="updatePrice">
+		update Product set	price=#{1} where id=#{0}
+	</update>
+	
+	<delete id="deleteProduct">
+		delete from Product where id=#{0}
+	</delete>
+	
+	<insert id="insertIntoProduct" parameterType="Product">
+		insert into Product values(null,#{class_id},#{name},#{sellerID},#{price},#{total},0,#{registerTime},#{updateTime},#{picture},0)
+	</insert>
+</mapper>

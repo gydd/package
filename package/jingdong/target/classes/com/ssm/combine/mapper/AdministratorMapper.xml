@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace必须是接口的全类名  -->
+<mapper namespace="com.ssm.combine.DAO.AdministratorDAO">
+	
+	<!-- <resultMap type="Administrator" id="administratorResult">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="password" property="password"/>
+	</resultMap> -->
+	
+	<select id="isCorrect" resultType="Administrator">
+		select * from Administrator where id = #{0} and password=#{1}
+	</select>
+	
+	<select id="getName" resultType="String">
+		select name from Administrator where id = #{0}
+	</select>
+	
+	<update id="modifyPassword">
+		update Administrator set password=#{1} where id=777 and password=#{0} 
+	</update>
+</mapper>
