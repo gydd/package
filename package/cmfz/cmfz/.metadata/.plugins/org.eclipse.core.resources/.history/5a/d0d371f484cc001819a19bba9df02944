@@ -1,0 +1,10 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+
+public class Menu implements Serializable {
+	private Integer id;
+	private String title;
+	private String iconcls;
+	private Integer parentid;
+}

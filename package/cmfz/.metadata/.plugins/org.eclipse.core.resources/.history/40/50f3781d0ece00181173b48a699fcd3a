@@ -1,0 +1,39 @@
+package com.yhao.service;
+
+import java.util.List;
+
+import com.yhao.entity.Chapter;
+
+public class ChapterServiceImpl implements ChapterService {
+
+	@Override
+	public void addItem(Chapter t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modifyItem(Chapter t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dropItem(Chapter t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Chapter queryItem(Chapter t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Chapter> queryItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

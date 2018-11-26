@@ -1,0 +1,43 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+
+public class Admin implements Serializable {
+	private Integer id;
+	private String name;
+	private String passeord;
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Admin(Integer id, String name, String passeord) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.passeord = passeord;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPasseord() {
+		return passeord;
+	}
+	public void setPasseord(String passeord) {
+		this.passeord = passeord;
+	}
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", name=" + name + ", passeord=" + passeord
+				+ "]";
+	}
+	
+}

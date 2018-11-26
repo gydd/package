@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.AlbumDao">
+<!-- 手动映射 -->
+<resultMap type="com.yhao.entity.Album" id="myAlbum">
+	<id column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<result column="" property=""/>
+	<collection property="chapter" ofType=""></collection>
+</resultMap>
+
+	<!-- 查询一条表格数据（专辑详情） -->
+	<select id="selectItem" parameterType="com.yhao.entity.Album" resultType="com.yhao.entity.Album">
+		select * from cmfz_album where id=#{id}
+	</select>
+	
+	<!-- 添加一条专辑数据 （添加专辑-图片路径）-->
+	<insert id="insertItem" parameterType="com.yhao.entity.Album">
+		insert into cmfz_album values(#{id},#{title},#{coverImg},#{count},#{score},#{author},#{brief},#{publishDate})
+	</insert>
+	
+	<!-- 删除一条专辑数据（专辑下架） -->
+	<delete id="deleteItem" parameterType="com.yhao.entity.Album">
+		delete from cmfz_album where id=#{id}
+	</delete>
+	
+	<!-- 查所有 -->
+	<select id="selectItems" resultMap="myAlbum">
+		SELECT a.*,c.*,c.id c_id,c.title c_title from cmfz_album a join cmfz_chapter c
+		on a.id = c.album_id
+	</select>
+</mapper>

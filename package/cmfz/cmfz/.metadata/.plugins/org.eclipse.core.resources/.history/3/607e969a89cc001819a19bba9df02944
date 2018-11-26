@@ -1,0 +1,16 @@
+package com.yhao.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.service.MenuService;
+
+@Controller
+@RequestMapping("/Admin")
+public class AdminController {
+	
+	@Resource(name="menuService")
+	private MenuService menuService;
+}

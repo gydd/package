@@ -1,0 +1,38 @@
+package com.yhao.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.yhao.entity.Admin;
+
+@Service("adminService")
+@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+public class AdminServiceImpl implements AdminService {
+
+	@Override
+	public void addItem(Admin t) {
+	}
+
+	@Override
+	public void modifyItem(Admin t) {
+	}
+
+	@Override
+	public void dropItem(Admin t) {
+	}
+
+	@Override
+	public Admin queryItem(Admin t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Admin> queryItems() {
+		return null;
+	}
+
+}

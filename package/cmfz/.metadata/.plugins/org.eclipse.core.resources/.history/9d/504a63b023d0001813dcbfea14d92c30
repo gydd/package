@@ -1,0 +1,9 @@
+package com.yhao.test;
+
+import org.apache.log4j.chainsaw.Main;
+
+public class TestUUID {
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,27 @@
+package com.yhao.controller;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.entity.Admin;
+import com.yhao.service.AdminService;
+
+@Controller
+@RequestMapping("/Admin")
+public class AdminController {
+	
+	@Resource(name="adminService")
+	private AdminService adminService;
+	
+	//管理员验证
+	public void queryOneController(Admin admin,HttpSession session){
+		Admin adm = adminService.queryItem(admin);
+		if
+		
+	}
+	
+	//验证码生成
+}

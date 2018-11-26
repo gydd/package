@@ -1,0 +1,52 @@
+package com.yhao.service;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.yhao.dao.AlbumDao;
+import com.yhao.entity.Album;
+import com.yhao.service.AlbumService;
+
+@Service("albumService")
+@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+public class AlbumServiceImpl implements AlbumService {
+	
+	@Resource(name="albumDao")
+	private AlbumDao albumDao;
+	
+	@Override
+	public void addItem(Album t) {
+		albumDao.insertItem(t);
+
+	}
+
+	@Override
+	public void modifyItem(Album t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dropItem(Album t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Album queryItem(Album t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> queryItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

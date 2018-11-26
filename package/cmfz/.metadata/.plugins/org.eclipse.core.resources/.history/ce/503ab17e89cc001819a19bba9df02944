@@ -1,0 +1,14 @@
+package com.yhao.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.service.MenuService;
+
+@Controller
+@RequestMapping("/Menu")
+public class MenuController {
+
+	private MenuService menuService;
+	
+}

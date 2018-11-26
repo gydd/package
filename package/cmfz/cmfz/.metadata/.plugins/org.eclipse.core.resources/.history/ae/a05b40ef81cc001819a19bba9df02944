@@ -1,0 +1,5 @@
+package com.yhao.dao;
+
+public interface ModelInterface<T t> {
+
+}

@@ -1,0 +1,5 @@
+package com.yhao.service;
+
+public interface AdminServiceImpl extends SImpl<T> {
+
+}

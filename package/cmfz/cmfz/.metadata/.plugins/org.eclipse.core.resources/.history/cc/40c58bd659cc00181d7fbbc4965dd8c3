@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="cmfz_yhao">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <property name="context-root" value="cmfz_yhao"/>
+        <property name="java-output-path" value="/cmfz_yhao/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

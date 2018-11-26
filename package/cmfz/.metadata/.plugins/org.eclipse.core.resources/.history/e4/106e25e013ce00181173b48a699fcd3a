@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.ChapterDao">
+	<!-- 查询该专辑下的所有章节数据 -->
+	<!-- 添加该专辑下的所有章节数据 （添加章节-章节上传-downloadPath）-->
+	<!-- 计算每一个专辑下的章节数 -->
+	<!-- 查询一条章节数据（下载路径） -->
+	<!-- 删除该专辑下的所有章节数据（专辑下架） -->
+</mapper>

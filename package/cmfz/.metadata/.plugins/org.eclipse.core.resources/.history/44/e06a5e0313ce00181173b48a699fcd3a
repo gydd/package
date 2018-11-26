@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.CarouselDao">
+	<!-- 添加表格数据 -->
+	<insert id="insertItem" parameterType="com.yhao.entity.Carousel">
+		
+	</insert>
+	
+	<!-- 修改轮播图状态 -->
+	<update id="updateItem" parameterType="com.yhao.entity.Carousel">
+	
+	</update>
+	
+	<!-- 删除表格数据 -->
+	<delete id="deleteItem" parameterType="com.yhao.entity.Carousel">
+		
+	</delete>
+	
+	<!-- 查询所有数据 -->
+	<select id="selectItems" resultType="com.yhao.entity.Carousel" parameterType="com.yhao.entity.Carousel"></select>
+</mapper>

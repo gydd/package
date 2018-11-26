@@ -1,0 +1,68 @@
+[
+  {
+    "id": 2,
+    "title": "甘露明珠srf",
+    "count": "3",
+    "createDate": "这是时间",
+    "score": "这是分数",
+    "author": "这是名字",
+    "broadCast": "这是播音",
+    "brief": "我是专辑",
+     "img":"http://localhost:8989/final-project6/img/1.jpg",
+    "children": [
+      {
+        "id": 2,
+        "title": "甘露明珠1",
+        "size": "120 MB",
+        "url": "a65143dc-5931-4a45-a163-0446d0e9bbfb.amr",
+        "time":"20分钟"
+      },
+      {
+        "id": 3,
+        "title": "甘露明珠3",
+        "size": "120 MB",
+        "url": "f863cd13-8e14-4801-9252-0d0a665dda15.mp3",
+        "time":"20分钟"
+      }
+    ]},
+  {
+    "id": 6,
+    "title": "甘露明珠ds",
+    "count": "3",
+    "createDate": "这是时间",
+    "score": "这是分数",
+    "author": "这是名字",
+    "broadCast": "这是播音",
+    "brief": "我是专辑",
+     "img":"http://localhost:8989/final-project6/img/1.jpg",
+     "children": [
+      {
+        "id": 8,
+        "title": "甘露明珠8",
+        "size": "120 MB",
+        "url": "a65143dc-5931-4a45-a163-0446d0e9bbfb.amr",
+        "time":"20分钟"
+      },
+      {
+        "id": 6,
+        "title": "甘露明珠6",
+        "size": "120 MB",
+        "url": "f863cd13-8e14-4801-9252-0d0a665dda15.mp3",
+        "time":"20分钟"
+      }] },
+      {
+      	"id": 9,
+	    "title": "甘露明珠ds",
+	    "count": "3",
+	    "createDate": "这是时间",
+	    "score": "这是分数",
+	    "author": "这是名字",
+	    "broadCast": "这是播音",
+	    "brief": "我是专辑",
+	     "img":"http://localhost:8989/final-project6/img/1.jpg",
+	     "children":[
+	 
+	     ]
+      
+      }
+]

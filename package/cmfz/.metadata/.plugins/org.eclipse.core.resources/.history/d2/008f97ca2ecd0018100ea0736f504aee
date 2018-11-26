@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.MenuDao">
+	<resultMap type="com.yhao.entity.Menu" id="myMenu">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="iconcls" property="iconcls"/>
+		<result column="href" property="href"/>
+		<collection property="menu" ofType="com.yhao.entity.Menu">
+			
+		</collection>
+	</resultMap>
+
+	<select id="selectItems" resultMap="myMenu">
+		select f.*,s.id s_id,s.title s_title,s.iconcls s_iconcls,s.parentid s_paremtid,s.href s_href
+		from cmfz_menu f join cmfz_menu s
+		on f.id=s.parentid
+	</select>
+</mapper>

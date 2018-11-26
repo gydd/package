@@ -1,0 +1,9 @@
+package com.yhao.service;
+
+import com.yhao.entity.Album;
+import com.yhao.entity.Chapter;
+
+public interface ChapterService extends IService<Chapter> {
+	
+	Integer countChapterByAlbumId(Album album);
+}

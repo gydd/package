@@ -1,0 +1,9 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+
+public class Admin implements Serializable {
+	private Integer id;
+	private String name;
+	private String passeord;
+}

@@ -1,0 +1,16 @@
+package com.yhao.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.service.AlbumService;
+
+@Controller
+@RequestMapping("/Carousel")
+public class CarouselController {
+	
+	@Resource(name="albumService")
+	private AlbumService albumService;
+}

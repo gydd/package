@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.CarouselDao">
+	<!-- 添加表格数据 -->
+	<insert id="" parameterType=""></insert>
+	
+	<!-- 修改轮播图状态 -->
+	<!-- 删除表格数据 -->
+</mapper>

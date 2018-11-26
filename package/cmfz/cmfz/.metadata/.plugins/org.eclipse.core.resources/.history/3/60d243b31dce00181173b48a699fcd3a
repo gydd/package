@@ -1,0 +1,36 @@
+package com.yhao.controller;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.entity.Carousel;
+import com.yhao.service.CarouselService;
+
+@Controller
+@RequestMapping("/Carousel")
+public class CarouselController {
+	
+	@Resource(name="carouselService")
+	private CarouselService carouselService;
+	
+	//添加
+	public void addCarouselController(Carousel carousel){
+		carouselService.addItem(carousel);
+	}
+	//修改
+	public void modifyCarouselController(Carousel carousel){
+		carouselService.modifyItem(carousel);
+	}
+	//删除
+	public void dropCarouselController(Carousel carousel){
+		carouselService.dropItem(carousel);
+	}
+	//查询
+	public List<Carousel> queryCarouselController(Carousel carousel){
+		return carouselService.queryItems();
+	}
+}

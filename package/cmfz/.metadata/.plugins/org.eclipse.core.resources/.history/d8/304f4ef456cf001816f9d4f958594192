@@ -1,0 +1,131 @@
+<%@ page language="java"  pageEncoding="utf-8"%>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>轮播图展示页面</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css"/>
+		<link rel="stylesheet" type="text/css" href="../themes/IconExtension.css"/>   
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css"/>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>   
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script> 
+		<script type="text/javascript" src="../js/datagrid-detailview.js"></script> 
+		<script type="text/javascript" src="../js/jquery.edatagrid.js"></script> 
+		<script type="text/javascript" src="../js/common.js"></script>  
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#carouselTable").edatagrid({
+					title:"轮播图展示",
+					fitColumns:true,
+					toolbar:"#carouselTableToolbar",
+					url:"${pageContext.request.contextPath}/Carousel/queryCarousel",
+					autoSave:true,
+					view:detailview,
+					detailFormatter: function(rowIndex, rowData){
+						return "<table><tr>"+
+						"<td colpan=2 style='border:0'><img src='"+rowData.imgPath+"'></img></td>"+
+						"<td rowspan=2 style='border:0'><p>图片名称："+rowData.title+"</p><p>图片描述："+rowData.description+"</P></td>"+
+						"</tr></table>";
+					},
+					destroyUrl:"${pageContext.request.contextPath}/Carousel/dropCarousel",
+					updateUrl:"${pageContext.request.contextPath}/Carousel/modifyCarousel"
+				});
+				
+				/* 轮播图添加对话框 */
+				$("#carouseAddDialog").dialog({
+					buttons:"#carouseAddDialogButtons",
+					width:300,
+					height:300,
+					closed:true,
+					cache:false,
+					modal:true
+				});
+				
+				/* 添加按钮 */
+				$("#carouseAdd").linkbutton({
+					onClick:function(){
+						$("#carouseAddDialog").dialog("open");
+					}
+				});
+				
+				/* 确认添加按钮 */
+				$("#carouseAddDialogButtonsOk").linkbutton({
+					onClick:function(){
+						$("#carouseAddForm").form("submit",{
+							url:"${pageContext.request.contextPath}/Carousel/upload",
+							onSubmit:function(){
+								return $("#carouseAddForm").form("validate");
+							},
+							success:function(){
+								$("#carouseAddDialog").dialog("close");
+								$("#carouselTable").datagrid("load");
+							}
+						});
+					}
+				});
+				
+				/* 删除事件 */
+				$("#carouseNo").linkbutton({
+					onClick:function(){
+						$("#carouselTable").edatagrid("destroyRow");
+						$("#carouselTable").datagrid("reload");
+						
+					}
+				});
+				
+				/* 修改事件 */
+				$("#carousePencil").linkbutton({
+					
+				});
+				
+				/*  */
+			});
+		</script>
+	</head>
+	<body>
+		<table id="carouselTable">
+			<thead>
+				<tr>
+					<th  data-options="field:'title',width:'1'">名字</th>
+					<th data-options="field:'status',editor:'text',width:'1'">状态</th>
+					<th data-options="field:'imgPath',width:'1'">路径</th>
+					<th data-options="field:'date',width:'1'">时间</th>
+				</tr>
+			</thead>
+		</table>
+	
+	<div id="carouselTableToolbar">
+		<a id="carouseAdd" class="easyui-linkbutton" data-options="iconCls:'icon-add',title:'添加',plain:true"></a>
+		<a id="carousePencil" class="easyui-linkbutton" data-options="iconCls:'icon-pencil',title:'修改',plain:true"></a>
+		<a id="carouseNo" class="easyui-linkbutton" data-options="iconCls:'icon-no',title:'删除',plain:true"></a>
+		<a id="carouseSave" class="easyui-linkbutton" data-options="iconCls:'icon-save',title:'保存',plain:true"></a>
+	</div>
+	
+	<div id="carouseAddDialog">
+		<form id="carouseAddForm" enctype="multipart/form-data" method="post">  
+	        title:<input class="easyui-validatebox" type="text" name="title" data-options="required:true" /> <br></br>    
+	        imgPath:<input class="easyui-validatebox" type="text" name="imgPath" data-options="required:true" /> <br></br> 
+	        description:<input class="easyui-validatebox" type="text" name="description" data-options="required:true" /> <br></br> 
+		  	uploadFile:<input class="easyui-filebox"  name="file" data-options="required:true" /> 
+		</form>
+	</div>
+	
+	<div id="carousePencilDialog">
+		
+	</div>
+	
+	<div id="carouseNoDialog">
+		
+	</div>
+	
+	<div id="carouseSaveDialog">
+		
+	</div>
+
+	<div id="carouseAddDialogButtons">
+		<a id="carouseAddDialogButtonsOk" class="easyui-linkbutton" data-options="iconCls:'icon-ok',title:'ok',plain:true"></a>
+		<a id="carouseAddDialogButtonsCancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',title:'cancel',plain:true"></a>
+	</div>
+	
+	</body>
+</html>

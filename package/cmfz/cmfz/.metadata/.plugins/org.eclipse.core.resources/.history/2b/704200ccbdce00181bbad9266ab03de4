@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.CarouselDao">
+	<!-- 添加表格数据 -->
+	<insert id="insertItem" parameterType="com.yhao.entity.Carousel">
+		insert into cmfz_carousel values(#{id},#{title},#{imgPath},#{description},1,#{date})
+	</insert>
+	
+	<!-- 修改轮播图状态 -->
+	<update id="updateItem" parameterType="com.yhao.entity.Carousel">
+		update cmfz_carousel set status=#{status} where id=#{id}
+	</update>
+	
+	<!-- 删除表格数据 -->
+	<delete id="deleteItem" parameterType="com.yhao.entity.Carousel">
+		delete from cmfz_carousel where id=#{id}
+	</delete>
+	
+	<!-- 查询所有数据 -->
+	<select id="selectItems" resultType="com.yhao.entity.Carousel">
+		select * from cmfz_carousel
+	</select>
+</mapper>

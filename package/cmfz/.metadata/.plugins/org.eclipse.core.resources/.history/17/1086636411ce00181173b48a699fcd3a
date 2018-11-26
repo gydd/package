@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhao.dao.AlbumDao">
+	<!-- 查询一条表格数据（专辑详情） -->
+	<!-- 添加一条专辑数据 （添加专辑-图片路径）-->
+</mapper>

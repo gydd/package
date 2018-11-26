@@ -1,0 +1,14 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Chapter implements Serializable {
+	private Integer id;
+	private String title;
+	private Double size;
+	private String duration;
+	private String downloadPath;
+	private Date uploadDate;
+	private Album album;
+}

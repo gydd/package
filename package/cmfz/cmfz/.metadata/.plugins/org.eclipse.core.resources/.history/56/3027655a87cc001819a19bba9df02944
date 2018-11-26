@@ -1,0 +1,16 @@
+package com.yhao.service;
+
+import java.util.List;
+
+public interface SImpl<T> {
+	
+	   void addItem(T t);
+	   
+	   void modifyItem(T t);
+	   
+	   void dropItem(T t);
+	   
+	   T queryItem(int id);
+	   
+	   List<T> queryItems();
+}

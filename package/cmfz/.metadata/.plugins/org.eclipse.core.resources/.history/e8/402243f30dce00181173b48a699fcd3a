@@ -1,0 +1,39 @@
+package com.yhao.service;
+
+import java.util.List;
+
+import com.yhao.entity.Carousel;
+
+public class CarouselServiceImpl implements CarouselService {
+
+	@Override
+	public void addItem(Carousel t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modifyItem(Carousel t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dropItem(Carousel t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Carousel queryItem(Carousel t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Carousel> queryItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

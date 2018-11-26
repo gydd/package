@@ -1,0 +1,5 @@
+package com.yhao.service;
+
+public interface CourseService extends IService<T> {
+
+}

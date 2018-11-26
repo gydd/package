@@ -1,0 +1,7 @@
+package Test1_;
+
+public class TestAll {
+	
+	@Test
+	public void testMove(){}
+}

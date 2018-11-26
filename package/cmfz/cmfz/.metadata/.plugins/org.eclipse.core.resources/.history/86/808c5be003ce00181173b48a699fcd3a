@@ -1,0 +1,13 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Carousel implements Serializable {
+	private Integer id;
+	private String title;
+	private String imgPath;
+	private String description;
+	private Integer status;
+	private Date date;
+}

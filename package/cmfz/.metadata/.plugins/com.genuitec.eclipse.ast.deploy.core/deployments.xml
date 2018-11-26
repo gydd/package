@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<deployments>
+  <deployment alt-context-root="" context-root="/cmfz_yhao" deployment-path="D:/tomcat/apache-tomcat-7.0.79/webapps/cmfz_yhao" project-name="cmfz_yhao" server-id="tomcat7Server" state="DEPLOYED" type="WEB"/>
+</deployments>

@@ -1,0 +1,7 @@
+package com.yhao.entity;
+
+import java.io.Serializable;
+
+public class Admin implements Serializable {
+
+}

@@ -1,0 +1,21 @@
+package com.yhao.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yhao.service.CarouselService;
+
+@Controller
+@RequestMapping("/Carousel")
+public class CarouselController {
+	
+	@Resource(name="carouselService")
+	private CarouselService carouselService;
+	
+	//添加
+	//修改
+	//删除
+	//查询
+}

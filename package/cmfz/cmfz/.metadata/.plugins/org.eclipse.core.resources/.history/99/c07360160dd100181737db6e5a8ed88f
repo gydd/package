@@ -1,0 +1,180 @@
+<%@ page language="java"  pageEncoding="utf-8"%>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>吉祥妙音展示页面</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css"/>
+		<link rel="stylesheet" type="text/css" href="../themes/IconExtension.css"/>   
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css"/>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>   
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script> 
+		<script type="text/javascript" src="../js/datagrid-detailview.js"></script> 
+		<script type="text/javascript" src="../js/jquery.edatagrid.js"></script> 
+		<script type="text/javascript" src="../js/common.js"></script>  
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$("#albumlTable").treegrid({
+					title:"吉祥妙音",
+					fit:true,
+					fitColumns:true,
+					toolbar:"#albumlTableToolbar",
+					url:"${pageContext.request.contextPath}/Album/queryAllAlbum",
+					idField:"id",    
+    				treeField:"title",
+    				onDblClickRow:function(index,row){//展示详情的双击行事件
+    					album = $("#albumlTable").treegrid("getSelected").id;
+    					
+    				}
+    				
+				});
+				
+				/* 专辑添加对话框 */
+				$("#albumAddDialog").dialog({
+					title:"专辑添加",
+					buttons:"#albumAddDialogButtons",
+					width:300,
+					height:300,
+					closed:true,
+					cache:false,
+					modal:true
+				});
+				
+				/* 章节添加对话框 */
+				$("#chapterAddDialog").dialog({
+					title:"章节添加",
+					buttons:"#chapterAddDialogButtons",
+					width:300,
+					height:300,
+					closed:true,
+					cache:false,
+					modal:true
+				});
+				
+				/* 添加按钮 */
+				$("#albumAdd").linkbutton({
+					onClick:function(){
+						$("#chapterAddDialog").dialog("open");
+					}
+				});
+				
+				/* 章节确认添加按钮 */
+				$("#chapterAddDialogButtonsOk").linkbutton({
+					onClick:function(){
+						$("#chapterAddForm").form("submit",{
+							url:"${pageContext.request.contextPath}/Chapter/upload",
+							onSubmit:function(){
+								return $("#chapterAddForm").form("validate");
+							},
+							success:function(){
+								$("#chapterAddDialog").dialog("close");
+								$.messager.confirm({
+									title:"confirm",
+									msg:"是否继续添加章节？",
+									fn:function(r){
+										if(r){
+											$("#chapterAddDialog").dialog("open");
+										}else{
+											$("#albumAddDialog").dialog("open");
+										}
+									}
+								});
+							}
+						});
+					}
+				});
+				
+				/* 专辑确认添加按钮 */
+				$("#albumAddDialogButtonsOk").linkbutton({
+					onClick:function(){
+						$("#albumAddForm").form("submit",{
+							url:"${pageContext.request.contextPath}/Album/upload",
+							onSubmit:function(){
+								return $("#albumAddForm").form("validate");
+							},
+							success:function(){
+								$("#albumAddDialog").dialog("close");
+								$("#albumlTable").treegrid("load");
+							}
+						});
+					}
+				});
+				
+				/* 专辑详情 */
+				
+				/* 下载 */
+				$("#albumSave").linkbutton({
+					onClick:function(){
+						//下载的点击行事件
+    					row = $("#albumlTable").treegrid("getSelected");
+    					url = "${pageContext.request.contextPath}/Chapter/download?fileName="+row.title;
+    					window.location.href = url;
+					}
+				});
+				
+			});
+			
+		</script>
+		
+		
+	</head>
+	<body>
+		<table id="albumlTable">
+			<thead>
+				<tr>
+					<th  data-options="field:'title',width:'5'">名字</th>
+					<th data-options="field:'downloadPath',width:'5'">下载路径</th>
+					<th data-options="field:'size',width:'1'">章节大小</th>
+					<th data-options="field:'duration',width:'1'">章节时长</th>
+				</tr>
+			</thead>
+		</table>
+	
+	<div id="albumlTableToolbar">
+		<a id="albumAdd" class="easyui-linkbutton" data-options="iconCls:'icon-add',title:'添加',plain:true"></a>
+		<a id="albumPencil" class="easyui-linkbutton" data-options="iconCls:'icon-pencil',title:'修改',plain:true"></a>
+		<a id="albumNo" class="easyui-linkbutton" data-options="iconCls:'icon-no',title:'删除',plain:true"></a>
+		<a id="albumSave" class="easyui-linkbutton" data-options="iconCls:'icon-save',title:'保存',plain:true"></a>
+	</div>
+	
+	<div id="albumAddDialog">
+		<form id="albumAddForm" enctype="multipart/form-data" method="post">  
+	        title:<input class="easyui-validatebox" type="text" name="title" data-options="required:true" /> <br></br>    
+	        score:<input class="easyui-validatebox" type="text" name="score" data-options="required:true" /> <br></br> 
+	        author:<input class="easyui-validatebox" type="text" name="author" data-options="required:true" /> <br></br> 
+	        brief:<input class="easyui-validatebox" type="text" name="brief" data-options="required:true" /> <br></br>
+		  	uploadFile:<input class="easyui-filebox"  name="file" data-options="required:true" /> 
+		</form>
+	</div>
+	
+	<div id="chapterAddDialog">
+		<form id="chapterAddForm" enctype="multipart/form-data" method="post">  
+	       uploadFile:<input class="easyui-filebox"  name="file" data-options="required:true" /> 
+		</form>
+	</div>
+	
+	<div id="albumPencilDialog">
+		
+	</div>
+	
+	<div id="albumNoDialog">
+		
+	</div>
+	
+	<div id="albumSaveDialog">
+		
+	</div>
+
+	<div id="albumAddDialogButtons">
+		<a id="albumAddDialogButtonsOk" class="easyui-linkbutton" data-options="iconCls:'icon-ok',title:'ok',plain:true"></a>
+		<a id="albumAddDialogButtonsCancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',title:'cancel',plain:true"></a>
+	</div>
+	
+	<div id="chapterAddDialogButtons">
+		<a id="chapterAddDialogButtonsOk" class="easyui-linkbutton" data-options="iconCls:'icon-ok',title:'ok',plain:true"></a>
+		<a id="chapterAddDialogButtonsCancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',title:'cancel',plain:true"></a>
+	</div>
+	
+	</body>
+</html>

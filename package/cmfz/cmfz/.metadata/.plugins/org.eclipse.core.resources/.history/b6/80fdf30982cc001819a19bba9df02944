@@ -1,0 +1,12 @@
+package com.yhao.dao;
+
+import java.util.List;
+
+public interface ModelInterface <T> {
+	
+    int insertItem(T t);
+   int updateItem(T t);
+   int deleteItem(T t);
+   T queryItem(int id);
+   List<T> queryItems();
+}

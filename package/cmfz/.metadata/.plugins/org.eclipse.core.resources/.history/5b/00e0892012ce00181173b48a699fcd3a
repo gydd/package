@@ -1,0 +1,9 @@
+package com.yhao.dao;
+
+import com.yhao.entity.Album;
+import com.yhao.entity.Chapter;
+
+public interface ChapterDao extends IDao<Chapter> {
+	
+	Integer getCountChapterByAlbumId(Album album);
+}

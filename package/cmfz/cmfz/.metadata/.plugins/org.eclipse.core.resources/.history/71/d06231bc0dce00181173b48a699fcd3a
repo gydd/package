@@ -1,0 +1,40 @@
+package AlbumService;
+
+import java.util.List;
+
+import com.yhao.entity.Album;
+import com.yhao.service.AlbumService;
+
+public class AlbumServiceImpl implements AlbumService {
+
+	@Override
+	public void addItem(Album t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void modifyItem(Album t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dropItem(Album t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Album queryItem(Album t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Album> queryItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
